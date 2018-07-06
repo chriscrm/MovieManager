@@ -1,6 +1,7 @@
 package sv.com.hometech.moviemanager.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import sv.com.hometech.moviemanager.R;
+import sv.com.hometech.moviemanager.activities.MovieDetailActivity;
 import sv.com.hometech.moviemanager.models.Movie;
 
 public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecyclerViewAdapter.ViewHolder> {
@@ -60,7 +62,7 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.idMovieImage)
         ImageView idMovieImage;
         @BindView(R.id.tvTitle)
@@ -73,6 +75,18 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+
+            Movie movie = movies.get(getAdapterPosition());
+
+            Intent intent = new Intent(getContext(), MovieDetailActivity.class);
+            intent.putExtra("MOVIE", movie);
+            getContext().startActivity(intent);
+
         }
     }
 }

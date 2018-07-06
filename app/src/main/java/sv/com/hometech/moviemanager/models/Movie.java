@@ -1,6 +1,8 @@
 package sv.com.hometech.moviemanager.models;
 
-public class Movie {
+import java.io.Serializable;
+
+public class Movie implements Serializable {
 
     private String id, title, overview, posterPath, backdropPath;
     private float voteAvg, voteCount;
@@ -48,7 +50,7 @@ public class Movie {
     }
 
     public String getBackdropPath() {
-        return backdropPath;
+        return String.format("https://image.tmdb.org/t/p/w780%s", backdropPath);
     }
 
     public void setBackdropPath(String backdropPath) {
